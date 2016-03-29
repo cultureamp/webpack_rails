@@ -67,7 +67,8 @@ When developing locally the `dev_server` mode is recommended, which seamlessly r
 
 ```ruby
 # development.rb
-config.webpack_rails.dev_server = true # use webpack dev server with hot module replacement
+config.webpack_rails.dev_server = true # use webpack dev server
+config.webpack_rails.dev_server_hmr = true # use hot module replacement (default: true)
 config.webpack_rails.port = 9001 # port to run dev server on
 config.webpack_rails.host = 'localhost' # ip to bind dev server on
 ```
