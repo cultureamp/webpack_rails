@@ -166,3 +166,8 @@ Finally, you can include the output CSS file on a page by calling `webpack_bundl
 ```
 = stylesheet_link_tag webpack_bundle_asset('app.bundle.css'), media: 'screen, print'
 ```
+
+### Rake tasks
+
+There are some optional rake tasks included which can be loaded from
+`webpack_rails/webpack_rails.rake`

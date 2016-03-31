@@ -1,8 +1,9 @@
 require_relative './task'
 
-namespace :webpack do
+namespace :webpack_rails do
   # build output files once, then exit
   task :build_once => :environment do
+    puts 'webpack_rails:build_once'
     WebpackRails::Task.build_once(Rails.application.config.webpack_rails)
   end
 
@@ -16,4 +17,4 @@ namespace :webpack do
 end
 
 # run webpack before every 'rake assets:precompile' (eg. build for production)
-Rake::Task['assets:precompile'].enhance(['webpack:build_once'])
+Rake::Task['assets:precompile'].enhance(['webpack_rails:build_once'])

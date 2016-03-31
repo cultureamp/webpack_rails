@@ -23,9 +23,5 @@ module WebpackRails
         include WebpackRails::Helper
       end
     end
-
-    rake_tasks do
-      load 'webpack_rails/webpack.rake'
-    end
   end
 end
