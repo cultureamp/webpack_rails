@@ -6,5 +6,6 @@ module WebpackRails::Config
     protocol: 'http',
     host: 'localhost',
     port: 9876,
+    sprockets_integration: true,
   }
 end

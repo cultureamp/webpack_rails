@@ -37,8 +37,10 @@ module WebpackRails
       end
 
       def webpack_task_script(config)
-        return webpack_task_watch_script if config[:watch]
-        return webpack_task_dev_server_script if config[:dev_server]
+        unless config[:watch] && config[:dev_server]
+          return webpack_task_watch_script if config[:watch]
+          return webpack_task_dev_server_script if config[:dev_server]
+        end
         fail "can't determine which task to run"
       end
 
@@ -87,6 +89,7 @@ module WebpackRails
 
       def run_webpack(config)
         return if ENV['DISABLE_WEBPACK']
+        return unless config[:dev_server] || config[:watch]
 
         result = nil
         task_duration = Benchmark.realtime do

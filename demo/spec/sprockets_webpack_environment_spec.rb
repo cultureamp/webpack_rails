@@ -72,7 +72,10 @@ RSpec.describe WebpackRails::SprocketsEnvironment do
     before(:all) do
       # run webpack like assets:precompile
       # uses config from application.rb
-      `WEBPACK_TEST_DEFINE="default" WEBPACK_TEST_DEFINE_OVERWRITE="WEBPACK_RAILS_1234567890" bundle exec rake webpack:build_once`
+      `WEBPACK_TEST_DEFINE="default" WEBPACK_TEST_DEFINE_OVERWRITE="WEBPACK_RAILS_1234567890" bundle exec rake webpack_rails:build_once`
+      unless $?.success?
+        raise "couldn't run rake task"
+      end
     end
 
     before(:each) { asset }

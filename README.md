@@ -92,6 +92,21 @@ add your webpack output path to Sprockets, if you're using it.
 
 Finally, in production you can just run `assets:precompile` and webpack will automatically run before assets are precompiled.
 
+## Config
+
+`webpack_rails` is configured though Rails application config, eg. in `application.rb`,
+initializers, or environment-specific config files like `production.rb`.
+
+```ruby
+config.webpack_rails.dev_server = true # use webpack dev server (default: false)
+config.webpack_rails.dev_server_hmr = true # use hot module replacement, when dev server enabled (default: true)
+config.webpack_rails.port = 9001 # port to run dev server on
+config.webpack_rails.host = 'localhost' # ip to bind dev server on
+config.webpack_rails.watch = false # use webpack watch mode instead of dev server (default: false)
+config.webpack_rails.webpack_config_file = 'config/dev.webpack.config.js' # (default: 'config/webpack.config.js')
+config.webpack_rails.sprockets_integration = true # run webpack before resolving sprockets assets (default: true)
+```
+
 ### Passing configuration through to webpack config
 
 You can set environment variables which will be passed through to the webpack process (which the webpack config file is run in):
@@ -169,5 +184,23 @@ Finally, you can include the output CSS file on a page by calling `webpack_bundl
 
 ### Rake tasks
 
-There are some optional rake tasks included which can be loaded from
-`webpack_rails/webpack_rails.rake`
+There are some optional rake tasks included in the `webpack_rails` gem which can
+be loaded in your `Rakefile`, eg.
+
+```ruby
+# Rakefile
+load 'webpack_rails/webpack_rails.rake'
+```
+
+### Usage without Sprockets
+
+Once it comes time to disable Sprockets entirely, you can configure `webpack_rails`
+to run webpack before resolving assets with the `webpack_bundle_asset`, and not 
+to hook into Sprockets Environment instance (which may not be present if you have
+disabled it). In this case you'll want to change your configuration in `application.rb`
+
+```ruby
+# application.rb
+config.webpack_rails.sprockets_integration = false # don't hook into sprockets, instead run webpack when webpack_bundle_asset is called
+```
+
