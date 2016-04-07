@@ -79,10 +79,19 @@ module WebpackRails
         return_value
       end
 
-      def build_once(config)
-        WebpackRails::Task.with_webpack_env(config) do
-          webpack_cmd_script = `#{WebpackRails::Task.node_command} -e "process.stdout.write(require.resolve('webpack/bin/webpack.js'))"`
-          system "#{WebpackRails::Task.node_command} '#{webpack_cmd_script}' --config #{config[:webpack_config_file]}"
+      def webpack_cmd_script
+        @webpack_cmd_script ||= `#{node_command} -e "process.stdout.write(require.resolve('webpack/bin/webpack.js'))"`
+      end
+
+      def build_once(config, quiet = false)
+        with_webpack_env(config) do
+          command = "#{node_command} '#{webpack_cmd_script}' --config #{config[:webpack_config_file]}"
+          if quiet
+            `#{command}`
+          else
+            system(command)
+          end
+
           fail 'Webpack command failed' unless $?.success?
         end
       end
