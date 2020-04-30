@@ -7,13 +7,13 @@ group :development, :test do
   gem 'rake'
 
   # dummy app
-  gem 'rails', '4.2.1'
+  gem 'rails', '4.2.8'
   gem 'sqlite3'
-  gem 'sass-rails', '~> 5.0'
-  gem 'uglifier', '>= 1.3.0'
+  gem 'sass-rails', '~> 5.0', '>= 5.0.4'
+  gem 'uglifier', '>= 2.7.2'
   gem 'awesome_print'
   gem 'byebug'
   gem 'better_errors'
   gem 'binding_of_caller'
-  gem 'rspec-rails'
+  gem 'rspec-rails', '>= 3.4.0'
 end
